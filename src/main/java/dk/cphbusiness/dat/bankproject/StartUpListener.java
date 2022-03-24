@@ -2,19 +2,19 @@ package dk.cphbusiness.dat.bankproject;
 
 import domainObejcts.Account;
 
-import java.io.*;
-import java.util.HashMap;
-import java.util.Map;
-import javax.servlet.ServletContext;
-import javax.servlet.ServletException;
+import javax.servlet.*;
 import javax.servlet.http.*;
 import javax.servlet.annotation.*;
+import java.util.HashMap;
+import java.util.Map;
 
-@WebServlet(name = "helloServlet", value = "/hello-servlet")
-public class HelloServlet extends HttpServlet {
+@WebListener
+public class StartUpListener implements ServletContextListener{
     private Map<String, Account> accounts = new HashMap<>();
 
-    public void init() {
+    @Override
+    public void contextInitialized(ServletContextEvent sce) {
+        /* This method is called when the servlet context is initialized(when the Web application is deployed). */
         Account account1 = new Account("Nicolai", "1", 150, false);
         Account account2 = new Account("Denis", "1", 15, true);
         Account account3 = new Account("Betül", "1", 170, false);
@@ -29,16 +29,12 @@ public class HelloServlet extends HttpServlet {
         accounts.put(account5.getName().toLowerCase(), account5);
         accounts.put(account6.getName().toLowerCase(), account6);
 
-    }
-
-    public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
-        ServletContext servletContext = getServletContext();
+        ServletContext servletContext = sce.getServletContext();
         servletContext.setAttribute("accounts", accounts);
-        String msg = "Oversigt over kontier";
-        request.setAttribute("msg", msg);
-        request.getRequestDispatcher("index.jsp").forward(request, response);
     }
 
-    public void destroy() {
+    @Override
+    public void contextDestroyed(ServletContextEvent sce) {
+        /* This method is called when the servlet Context is undeployed or Application Server shuts down. */
     }
 }

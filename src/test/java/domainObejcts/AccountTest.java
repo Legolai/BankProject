@@ -20,7 +20,7 @@ class AccountTest {
     }
 
     @Test
-    void depositNeagtiveAmount() {
+    void depositNegativeAmount() {
         assertEquals(1000, account.deposit(-100));
     }
 
@@ -30,7 +30,7 @@ class AccountTest {
     }
 
     @Test
-    void withdrawNeagtiveAmount() {
+    void withdrawNegativeAmount() {
         assertEquals(1000, account.withdraw(-100));
     }
 

@@ -34,7 +34,7 @@ public class HelloServlet extends HttpServlet {
     public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
         ServletContext servletContext = getServletContext();
         servletContext.setAttribute("accounts", accounts);
-        String msg = "Oversigt over kontier";
+        String msg = "Oversigt over accounts";
         request.setAttribute("msg", msg);
         request.getRequestDispatcher("index.jsp").forward(request, response);
     }
